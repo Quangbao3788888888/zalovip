@@ -13,6 +13,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Unzip source
+        run: |
+          if [ -f "ZaloXposed_v3.0.zip" ]; then
+            unzip -o ZaloXposed_v3.0.zip
+            # Di chuyển nội dung ra gốc repo
+            if [ -d "ZaloXposed_v3" ]; then
+              cp -r ZaloXposed_v3/* .
+              cp -r ZaloXposed_v3/.* . 2>/dev/null || true
+            fi
+          fi
+          ls -la
+
       - name: Select Xcode
         run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer || true
 
